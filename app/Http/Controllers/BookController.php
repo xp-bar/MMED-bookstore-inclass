@@ -18,4 +18,12 @@ class BookController extends Controller
         $books = Book::all()->toArray();
         return json_encode($books);
     }
+
+    // Dependency Injection
+    public function show(Book $book)
+    {
+        // dd($book);
+        // $book = Book::find($id);
+        return $book;
+    }
 }

@@ -26,3 +26,5 @@ Route::get('/', function () {
 
 // ::class prints the FQN, qhich is App\Http\Controllers\BookController
 Route::get('/books', [BookController::class, 'index']);
+
+Route::get('/books/{book}', [BookController::class, 'show']);
