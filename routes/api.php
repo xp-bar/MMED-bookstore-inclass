@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/', function () {
     return json_encode(['hello' => 'world']);
 });
+
+// ::class prints the FQN, qhich is App\Http\Controllers\BookController
+Route::get('/books', [BookController::class, 'index']);
