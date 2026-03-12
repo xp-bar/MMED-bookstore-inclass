@@ -21,6 +21,7 @@ class BookController extends Controller
             // $booksQuery->whereAuthorId($authorId);
             $booksQuery->where('author_id', '=', $authorId);
         }
+        $booksQuery->with('author');
         $books = $booksQuery->get();
         return $books;
     }
@@ -33,8 +34,14 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        // dd($book);
-        // $book = Book::find($id);
+        // this will load 'author' on 'book'
+        // this does a query
+        // $author = $book->author;
+
+        // this does NOT do a query
+        // $authorOther = $book->author;
+
+        $book->load('author');
         return $book;
     }
 }
