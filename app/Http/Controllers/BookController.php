@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    /**
+     * Return a list of books
+     * 
+     * @return array
+     */
     public function index()
     {
 
@@ -19,7 +24,12 @@ class BookController extends Controller
         return json_encode($books);
     }
 
-    // Dependency Injection
+    /**
+     * This endpoint shows a specific book
+     * 
+     * @param Book $book The book I want to show
+     * @return Book
+     */
     public function show(Book $book)
     {
         // dd($book);
