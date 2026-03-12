@@ -12,16 +12,17 @@ class BookController extends Controller
      * 
      * @return array
      */
-    public function index()
+    public function index(Request $request)
     {
+        $authorId = $request->get('author_id', null);
 
-        // return Book::all();
-        // return Book::all()->toArray();
-        // return json_encode(Book::all()->toArray());
-        // return Book::all()->toJson();
-
-        $books = Book::all()->toArray();
-        return json_encode($books);
+        $booksQuery = Book::query();
+        if ($authorId !== null) {
+            // $booksQuery->whereAuthorId($authorId);
+            $booksQuery->where('author_id', '=', $authorId);
+        }
+        $books = $booksQuery->get();
+        return $books;
     }
 
     /**
