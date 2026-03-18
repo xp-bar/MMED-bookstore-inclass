@@ -17,27 +17,13 @@ class BookController extends Controller
         $authorId = $request->get('author_id', null);
         $authorName = $request->get('author_name', '');
 
-        // return Book::query()
-        //     ->when($authorId, function ($query) use ($authorId) {
-        //         $query->whereAuthorId($authorId);
-        //     })
-        //     ->when($authorName, function ($query) use ($authorName) {
-        //         $query->whereHas('author', function ($query) use ($authorName) {
-        //             $query->whereLike('name', '%' . $authorName . '%');
-        //         });
-        //     })
-        //     ->get();
-        //     ;
-
         $booksQuery = Book::query();
         if ($authorId !== null) {
-            // $booksQuery->whereAuthorId($authorId);
             $booksQuery->where('author_id', '=', $authorId);
         }
 
         if (! empty($authorName)) {
             $booksQuery->whereHas('author', function ($authorQuery) use ($authorName) {
-                // $authorQuery->whereLike('name', '%something%');
                 $authorQuery->where('name', 'LIKE', '%' . $authorName . '%');
             });
         }
@@ -54,13 +40,6 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        // this will load 'author' on 'book'
-        // this does a query
-        // $author = $book->author;
-
-        // this does NOT do a query
-        // $authorOther = $book->author;
-
         $book->load('author');
         return $book;
     }
