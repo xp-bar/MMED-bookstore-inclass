@@ -41,3 +41,6 @@ Route::post('/books', [BookController::class, 'store']);
 // PATCH = change whatever fields are provided, and leave the rest alone!
 
 Route::patch('/books/{book}', [BookController::class, 'update']);
+
+// DELETE
+Route::delete('/books/{book}', [BookController::class, 'destroy']);

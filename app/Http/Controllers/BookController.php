@@ -70,4 +70,9 @@ class BookController extends Controller
 
         return $book;
     }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+    }
 }
