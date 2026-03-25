@@ -29,18 +29,18 @@ Route::get('/books', [BookController::class, 'index']);
 
 Route::get('/books/{book}', [BookController::class, 'show']);
 
-// INDEX: list resources :check:
-// SHOW: single resource :check:
+
+Route::get('/books/{book}/authors/{author}', [BookController::class, 'showAuthor']);
+
+// INDEX: list resources
+// SHOW: single resource
 // STORE: create a new resource
 // UPDATE: updating a resource
-// DESTROY: deleting / destroying a resource
+// DESTROY: deleting a resource
 
-Route::post('/books', [BookController::class, 'store']);
+Route::post ('/books', [BookController::class, 'store']);
 
-// PUT = the ENTIRE object must be provided, meaning any missing fields are updated to null
-// PATCH = change whatever fields are provided, and leave the rest alone!
+// PUT -- the entire object must be provided, meaning any missing fields are updated to null
+// PATCH -- change whatever fields are provided, leaving the rest unchanged
 
 Route::patch('/books/{book}', [BookController::class, 'update']);
-
-// DELETE
-Route::delete('/books/{book}', [BookController::class, 'destroy']);
