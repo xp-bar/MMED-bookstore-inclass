@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // BookSeeder::class === Database\Seeders\BookSeeder
         $this->call([
+            UserSeeder::class,
             AuthorSeeder::class,
             BookSeeder::class,
         ]);
