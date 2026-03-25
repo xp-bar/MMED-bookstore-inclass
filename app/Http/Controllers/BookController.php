@@ -17,6 +17,18 @@ class BookController extends Controller
         $authorId = $request->get('author_id', null);
         $authorName = $request->get('author_name', '');
 
+        // return Book::query()
+        //     ->when($authorId, function ($query) use ($authorId) {
+        //         $query->whereAuthorId($authorId);
+        //     })
+        //     ->when($authorName, function ($query) use ($authorName) {
+        //         $query->whereHas('author', function ($query) use ($authorName) {
+        //             $query->whereLike('name', '%' . $authorName . '%');
+        //         });
+        //     })
+        //     ->get();
+        //     ;
+
         $booksQuery = Book::query();
         if ($authorId !== null) {
             $booksQuery->where('author_id', '=', $authorId);
@@ -40,39 +52,14 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        // this will load 'author' on 'book'
+        // this does a query
+        // $author = $book->author;
+
+        // this does NOT do a query
+        // $authorOther = $book->author;
+
         $book->load('author');
         return $book;
-    }
-
-    public function store(Request $request)
-    {
-        $title = $request->input('title');
-        $authorId = $request->input('author_id', null);
-        $publisherId = $request->input('publisher_id', null);
-
-        $book = Book::make([
-            'title' => $title,
-        ]);
-
-        $book->author()->associate($authorId);
-        $book->save();
-
-        return $book;
-    }
-
-    public function update(Request $request, Book $book)
-    {
-        if ($request->has('title')) {
-            $book->title = $request->input('title');
-        }
-
-        $book->save();
-
-        return $book;
-    }
-
-    public function destroy(Book $book)
-    {
-        $book->delete();
     }
 }
