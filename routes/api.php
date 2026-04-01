@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', [AuthController::class, 'login'])->middleware('web');
 Route::get('/me', [AuthController::class, 'me'])
     // ->middleware('auth:sanctum')
     ->middleware([
